@@ -12,7 +12,11 @@ also checks for stalemate - if no win checkers happen, and we've hit 9 pieces (c
 */
 
 const newGame = () => {
-  this.board = [['','',''],['','',''],['','','']];
+  this.board = [['[]','[]','[]'],['[]','[]','[]'],['[]','[]','[]']];
+
+  this.printBoard = () => {
+    console.log(`${this.board[0][0]} ${this.board[0][1]} ${this.board[0][2]}\n${this.board[1][0]} ${this.board[1][1]} ${this.board[1][2]}\n${this.board[2][0]} ${this.board[2][1]} ${this.board[2][2]}`)
+  }
 
   this.currPc = 'X';
 
@@ -44,8 +48,11 @@ const newGame = () => {
     if (moveIdx === 9) {
       this.board[2][2] = this.currPc;
     }
-    
+
+    this.printBoard();
+
     // execute win checkers
+    // execute stalemate checker
 
     if (this.currPc === 'X') {
       this.currPc = 'O';
