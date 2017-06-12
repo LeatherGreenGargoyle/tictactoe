@@ -20,6 +20,24 @@ const newGame = () => {
 
   this.currPc = 'X';
 
+  this.detectColumnWin = () => {
+    if (this.board[0][0] !== '[]') {
+      if (this.board[1][0] === this.board[0][0] && this.board[2][0] === this.board[0][0]) {
+        console.log(`Player ${this.board[0][0]} wins!`)
+      }
+    }
+    if (this.board[0][1] !== '[]') {
+      if (this.board[1][1] === this.board[0][1] && this.board[2][1] === this.board[0][1]) {
+        console.log(`Player ${this.board[0][1]} wins!`)
+      }
+    }
+    if (this.board[0][2] !== '[]') {
+      if (this.board[1][2] === this.board[0][2] && this.board[2][2] === this.board[0][2]) {
+        console.log(`Player ${this.board[0][2]} wins!`)
+      }
+    }
+  }
+
   this.placePiece = (moveIdx) => {
     if (moveIdx === 1) {
       this.board[0][0] = this.currPc;
