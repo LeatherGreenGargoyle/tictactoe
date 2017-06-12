@@ -20,7 +20,7 @@ const newGame = () => {
 
   this.currPc = 'X';
 
-  this.detectColumnWin = () => {
+  this.detectColumnWin = (yIdx, xIdx) => {
     if (this.board[0][0] !== '[]') {
       if (this.board[1][0] === this.board[0][0] && this.board[2][0] === this.board[0][0]) {
         console.log(`Player ${this.board[0][0]} wins!`)
@@ -35,6 +35,36 @@ const newGame = () => {
       if (this.board[1][2] === this.board[0][2] && this.board[2][2] === this.board[0][2]) {
         console.log(`Player ${this.board[0][2]} wins!`)
       }
+    }
+  }
+
+  this.detectRowWin = () => {
+    if (this.board[0][0] !== '[]') {
+      if (this.board[0][1] === this.board[0][0] && this.board[0][2] === this.board[0][0]) {
+        console.log(`Player ${this.board[0][0]} wins!`)
+      }
+    }
+    if (this.board[1][0] !== '[]') {
+      if (this.board[1][1] === this.board[1][0] && this.board[1][2] === this.board[1][0]) {
+        console.log(`Player ${this.board[0][1]} wins!`)
+      }
+    }
+    if (this.board[2][0] !== '[]') {
+      if (this.board[2][1] === this.board[2][1] && this.board[2][1] === this.board[2][1]) {
+        console.log(`Player ${this.board[0][2]} wins!`)
+      }
+    }
+  }
+
+  this.detectMajorDiagWin = () => {
+    if (this.board[2,0] === this.board[1,1] === this.board[0,2]) {
+      console.log(`Player ${this.board[2,0] wins!}`)
+    }
+  }
+
+  this.detectMinorDiagWin = () => {
+    if (this.board[0,0] === this.board[1,1] === this.board[2,2]) {
+      console.log(`Player ${this.board[2,0] wins!}`)
     }
   }
 
@@ -69,7 +99,10 @@ const newGame = () => {
 
     this.printBoard();
 
-    // execute win checkers
+    this.detectColumnWin();
+    this.detectMajorDiagWin();
+    this.detectMinorDiagWin();
+    this.detectRowWin();
     // execute stalemate checker
 
     if (this.currPc === 'X') {
@@ -78,5 +111,4 @@ const newGame = () => {
       this.currPc = 'X';
     }
   }
-
 }
