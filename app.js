@@ -19,6 +19,7 @@ const newGame = () => {
   }
 
   this.currPc = 'X';
+  this.numberOfPieces = 0;
 
   this.detectColumnWin = (yIdx, xIdx) => {
     if (this.board[0][0] !== '[]') {
@@ -103,7 +104,8 @@ const newGame = () => {
     this.detectMajorDiagWin();
     this.detectMinorDiagWin();
     this.detectRowWin();
-    // execute stalemate checker
+    
+    if (this.numberOfPieces === 9) console.log('Stalemate!')
 
     if (this.currPc === 'X') {
       this.currPc = 'O';
