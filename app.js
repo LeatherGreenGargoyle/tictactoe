@@ -11,12 +11,14 @@ diagonal win checker
 also checks for stalemate - if no win checkers happen, and we've hit 9 pieces (counter) then return stalemate
 */
 
-const newGame = () => {
+const prompt = require('prompt');
+
+const Game = function() {
   this.board = [['[]','[]','[]'],['[]','[]','[]'],['[]','[]','[]']];
 
   this.printBoard = () => {
     console.log(`${this.board[0][0]} ${this.board[0][1]} ${this.board[0][2]}\n${this.board[1][0]} ${this.board[1][1]} ${this.board[1][2]}\n${this.board[2][0]} ${this.board[2][1]} ${this.board[2][2]}`)
-  }
+  };
 
   this.currPc = 'X';
   this.numberOfPieces = 0;
@@ -37,7 +39,7 @@ const newGame = () => {
         console.log(`Player ${this.board[0][2]} wins!`)
       }
     }
-  }
+  };
 
   this.detectRowWin = () => {
     if (this.board[0][0] !== '[]') {
@@ -55,19 +57,19 @@ const newGame = () => {
         console.log(`Player ${this.board[0][2]} wins!`)
       }
     }
-  }
+  };
 
   this.detectMajorDiagWin = () => {
     if (this.board[2,0] === this.board[1,1] === this.board[0,2]) {
-      console.log(`Player ${this.board[2,0] wins!}`)
+      console.log(`Player ${this.board[2,0]} wins!}`)
     }
-  }
+  };
 
   this.detectMinorDiagWin = () => {
     if (this.board[0,0] === this.board[1,1] === this.board[2,2]) {
-      console.log(`Player ${this.board[2,0] wins!}`)
+      console.log(`Player ${this.board[2,0]} wins!}`)
     }
-  }
+  };
 
   this.placePiece = (moveIdx) => {
     if (moveIdx === 1) {
@@ -112,5 +114,19 @@ const newGame = () => {
     } else {
       this.currPc = 'X';
     }
+
+    this.promptMove();
+  };
+
+  this.promptMove = () => {
+    prompt.start();
+    console.log(`Player ${this.currPc}'s turn!`)
+    prompt.get(['Move'], (err, res) => {
+      game.placePiece(res.Move);
+    })
   }
 }
+
+let game = new Game();
+console.log('On your move, enter 1-9')
+game.promptMove();
