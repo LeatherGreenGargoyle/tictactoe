@@ -72,31 +72,31 @@ const detectMinorDiagWin = () => {
 };
 
 const placePiece = (moveIdx) => {
-  if (moveIdx === 1) {
+  if (moveIdx == 1) {
     board[0][0] = currPc;
   }
-  if (moveIdx === 2) {
+  if (moveIdx == 2) {
     board[0][1] = currPc;
   }
-  if (moveIdx === 3) {
+  if (moveIdx == 3) {
     board[0][2] = currPc;
   }
-  if (moveIdx === 4) {
+  if (moveIdx == 4) {
     board[1][0] = currPc;
   }
-  if (moveIdx === 5) {
+  if (moveIdx == 5) {
     board[1][1] = currPc;
   }
-  if (moveIdx === 6) {
+  if (moveIdx == 6) {
     board[1][2] = currPc;
   }
-  if (moveIdx === 7) {
+  if (moveIdx == 7) {
     board[2][0] = currPc;
   }
-  if (moveIdx === 8) {
+  if (moveIdx == 8) {
     board[2][1] = currPc;
   }
-  if (moveIdx === 9) {
+  if (moveIdx == 9) {
     board[2][2] = currPc;
   }
 
