@@ -13,120 +13,119 @@ also checks for stalemate - if no win checkers happen, and we've hit 9 pieces (c
 
 const prompt = require('prompt');
 
-const Game = function() {
-  this.board = [['[]','[]','[]'],['[]','[]','[]'],['[]','[]','[]']];
 
-  this.printBoard = () => {
-    console.log(`${this.board[0][0]} ${this.board[0][1]} ${this.board[0][2]}\n${this.board[1][0]} ${this.board[1][1]} ${this.board[1][2]}\n${this.board[2][0]} ${this.board[2][1]} ${this.board[2][2]}`)
-  };
+let board = [['[]','[]','[]'],['[]','[]','[]'],['[]','[]','[]']];
 
-  this.currPc = 'X';
-  this.numberOfPieces = 0;
+const printBoard = () => {
+  console.log(`${board[0][0]} ${board[0][1]} ${board[0][2]}\n${board[1][0]} ${board[1][1]} ${board[1][2]}\n${board[2][0]} ${board[2][1]} ${board[2][2]}`)
+};
 
-  this.detectColumnWin = (yIdx, xIdx) => {
-    if (this.board[0][0] !== '[]') {
-      if (this.board[1][0] === this.board[0][0] && this.board[2][0] === this.board[0][0]) {
-        console.log(`Player ${this.board[0][0]} wins!`)
-      }
-    }
-    if (this.board[0][1] !== '[]') {
-      if (this.board[1][1] === this.board[0][1] && this.board[2][1] === this.board[0][1]) {
-        console.log(`Player ${this.board[0][1]} wins!`)
-      }
-    }
-    if (this.board[0][2] !== '[]') {
-      if (this.board[1][2] === this.board[0][2] && this.board[2][2] === this.board[0][2]) {
-        console.log(`Player ${this.board[0][2]} wins!`)
-      }
-    }
-  };
+let currPc = 'X';
+let numberOfPieces = 0;
 
-  this.detectRowWin = () => {
-    if (this.board[0][0] !== '[]') {
-      if (this.board[0][1] === this.board[0][0] && this.board[0][2] === this.board[0][0]) {
-        console.log(`Player ${this.board[0][0]} wins!`)
-      }
+const detectColumnWin = () => {
+  if (board[0][0] !== '[]') {
+    if (board[1][0] === board[0][0] && board[2][0] === board[0][0]) {
+      console.log(`Player ${board[0][0]} wins!`)
     }
-    if (this.board[1][0] !== '[]') {
-      if (this.board[1][1] === this.board[1][0] && this.board[1][2] === this.board[1][0]) {
-        console.log(`Player ${this.board[0][1]} wins!`)
-      }
-    }
-    if (this.board[2][0] !== '[]') {
-      if (this.board[2][1] === this.board[2][1] && this.board[2][1] === this.board[2][1]) {
-        console.log(`Player ${this.board[0][2]} wins!`)
-      }
-    }
-  };
-
-  this.detectMajorDiagWin = () => {
-    if (this.board[2,0] === this.board[1,1] === this.board[0,2]) {
-      console.log(`Player ${this.board[2,0]} wins!}`)
-    }
-  };
-
-  this.detectMinorDiagWin = () => {
-    if (this.board[0,0] === this.board[1,1] === this.board[2,2]) {
-      console.log(`Player ${this.board[2,0]} wins!}`)
-    }
-  };
-
-  this.placePiece = (moveIdx) => {
-    if (moveIdx === 1) {
-      this.board[0][0] = this.currPc;
-    }
-    if (moveIdx === 2) {
-      this.board[0][1] = this.currPc;
-    }
-    if (moveIdx === 3) {
-      this.board[0][2] = this.currPc;
-    }
-    if (moveIdx === 4) {
-      this.board[1][0] = this.currPc;
-    }
-    if (moveIdx === 5) {
-      this.board[1][1] = this.currPc;
-    }
-    if (moveIdx === 6) {
-      this.board[1][2] = this.currPc;
-    }
-    if (moveIdx === 7) {
-      this.board[2][0] = this.currPc;
-    }
-    if (moveIdx === 8) {
-      this.board[2][1] = this.currPc;
-    }
-    if (moveIdx === 9) {
-      this.board[2][2] = this.currPc;
-    }
-
-    this.printBoard();
-
-    this.detectColumnWin();
-    this.detectMajorDiagWin();
-    this.detectMinorDiagWin();
-    this.detectRowWin();
-    
-    if (this.numberOfPieces === 9) console.log('Stalemate!')
-
-    if (this.currPc === 'X') {
-      this.currPc = 'O';
-    } else {
-      this.currPc = 'X';
-    }
-
-    this.promptMove();
-  };
-
-  this.promptMove = () => {
-    prompt.start();
-    console.log(`Player ${this.currPc}'s turn!`)
-    prompt.get(['Move'], (err, res) => {
-      game.placePiece(res.Move);
-    })
   }
+  if (board[0][1] !== '[]') {
+    if (board[1][1] === board[0][1] && board[2][1] === board[0][1]) {
+      console.log(`Player ${board[0][1]} wins!`)
+    }
+  }
+  if (board[0][2] !== '[]') {
+    if (board[1][2] === board[0][2] && board[2][2] === board[0][2]) {
+      console.log(`Player ${board[0][2]} wins!`)
+    }
+  }
+};
+
+const detectRowWin = () => {
+  if (board[0][0] !== '[]') {
+    if (board[0][1] === board[0][0] && board[0][2] === board[0][0]) {
+      console.log(`Player ${board[0][0]} wins!`)
+    }
+  }
+  if (board[1][0] !== '[]') {
+    if (board[1][1] === board[1][0] && board[1][2] === board[1][0]) {
+      console.log(`Player ${board[0][1]} wins!`)
+    }
+  }
+  if (board[2][0] !== '[]') {
+    if (board[2][1] === board[2][1] && board[2][1] === board[2][1]) {
+      console.log(`Player ${board[0][2]} wins!`)
+    }
+  }
+};
+
+const detectMajorDiagWin = () => {
+  if (board[2,0] === board[1,1] === board[0,2]) {
+    console.log(`Player ${board[2,0]} wins!}`)
+  }
+};
+
+const detectMinorDiagWin = () => {
+  if (board[0,0] === board[1,1] === board[2,2]) {
+    console.log(`Player ${board[2,0]} wins!}`)
+  }
+};
+
+const placePiece = (moveIdx) => {
+  if (moveIdx === 1) {
+    board[0][0] = currPc;
+  }
+  if (moveIdx === 2) {
+    board[0][1] = currPc;
+  }
+  if (moveIdx === 3) {
+    board[0][2] = currPc;
+  }
+  if (moveIdx === 4) {
+    board[1][0] = currPc;
+  }
+  if (moveIdx === 5) {
+    board[1][1] = currPc;
+  }
+  if (moveIdx === 6) {
+    board[1][2] = currPc;
+  }
+  if (moveIdx === 7) {
+    board[2][0] = currPc;
+  }
+  if (moveIdx === 8) {
+    board[2][1] = currPc;
+  }
+  if (moveIdx === 9) {
+    board[2][2] = currPc;
+  }
+
+  printBoard();
+
+  detectColumnWin();
+  detectMajorDiagWin();
+  detectMinorDiagWin();
+  detectRowWin();
+  
+  if (numberOfPieces === 9) console.log('Stalemate!')
+
+  if (currPc === 'X') {
+    currPc = 'O';
+  } else {
+    currPc = 'X';
+  }
+
+  promptMove();
+};
+
+const promptMove = () => {
+  prompt.start();
+  console.log(`Player ${currPc}'s turn!`)
+  prompt.get(['Move'], (err, res) => {
+    placePiece(res.Move);
+  })
 }
 
-let game = new Game();
 console.log('On your move, enter 1-9')
-game.promptMove();
+
+promptMove();
